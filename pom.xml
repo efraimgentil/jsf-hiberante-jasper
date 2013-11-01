@@ -29,7 +29,15 @@
 			<artifactId>h2</artifactId>
 			<version>1.3.174</version>
 		</dependency>
-		            
+
+
+		<!-- Jasper -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+
 
 	</dependencies>
 
