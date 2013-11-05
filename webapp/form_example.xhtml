@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		
+		<p>
+			New Example
+		</p>
+			    
+	    <h:form id="form-exemple" prependId="false">
+	    	
+	    	<h:messages />
+	    	
+	    	<h:panelGrid columns="2">
+	    		<h:outputLabel value="Name" for="name" />
+	    		<h:inputText id="name" label="Name" value="#{exampleFormMB.example.name}" required="true" />
+	    		
+	    		<h:outputLabel value="Description" for="description" />
+	    		<h:inputText id="description" label="Description" value="#{exampleFormMB.example.description}" required="true"  />
+	    		
+	    		<h:outputLabel value="Date" for="date" />
+	    		<h:inputText id="date" label="Date" value="#{exampleFormMB.example.date}" required="true" >
+	    			<f:convertDateTime pattern="yyyy-MM-dd" />
+	    		</h:inputText>
+	    		
+	    		<h:outputLabel value="" />
+	    		<h:panelGroup>
+		    		<h:commandButton action="#{exampleFormMB.create}" value="Create" />
+		    		<h:commandButton action="/list_example.jsf?faces-redirect=true" value="Cancel" immediate="true"  />
+	    		</h:panelGroup>
+	    	</h:panelGrid>
+	    	
+	    </h:form>
+	    
+	</ui:define>
+	
+</ui:composition>
+</html>

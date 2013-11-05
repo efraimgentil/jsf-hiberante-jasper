@@ -1,0 +1,3 @@
+10-31 23:27:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EXEMPLE" not found; SQL statement:
+select exemple0_.id as id1_0_0_, exemple0_.date as date2_0_0_, exemple0_.description as descript3_0_0_, exemple0_.name as name4_0_0_ from exemple exemple0_ where exemple0_.id=? [42102-174]
