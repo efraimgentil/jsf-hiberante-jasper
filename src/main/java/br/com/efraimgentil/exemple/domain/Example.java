@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -18,7 +20,6 @@ import javax.persistence.TemporalType;
 @Table(name="example")
 @NamedQueries(value = {
 		@NamedQuery( name = "EXEMPLE_FIND_ALL" , query = "SELECT e FROM Example e")
-		
 })
 public class Example {
 		
@@ -38,6 +39,10 @@ public class Example {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date" , nullable = false )
 	private Date date;
+	
+	@ManyToOne
+	@JoinColumn(name = "complex_example_id")
+	private ComplexExample complexExample;
 	
 	public Example() {	}
 	
@@ -87,5 +92,13 @@ public class Example {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+  public ComplexExample getComplexExample() {
+    return complexExample;
+  }
+
+  public void setComplexExample(ComplexExample complexExample) {
+    this.complexExample = complexExample;
+  }
 	
 }
