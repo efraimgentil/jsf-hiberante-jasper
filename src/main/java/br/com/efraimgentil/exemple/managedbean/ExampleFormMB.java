@@ -2,6 +2,7 @@ package br.com.efraimgentil.exemple.managedbean;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -17,8 +18,7 @@ public class ExampleFormMB implements Serializable {
 
 	private static final long serialVersionUID = 1758718052118631435L;
 
-	private Example example ;
-	
+	private Example example;
 	private ExampleBS exampleBS;
 	
 	public ExampleFormMB() {
@@ -30,7 +30,6 @@ public class ExampleFormMB implements Serializable {
 	}
 
 	public String create() {
-		exampleBS = new ExampleBS();
 		exampleBS.insert( getExample() );
 		return "/list_example.jsf?faces-redirect=true";
 	}
@@ -41,6 +40,11 @@ public class ExampleFormMB implements Serializable {
 
 	public void setExample(Example example) {
 		this.example = example;
+	}
+	
+	@PostConstruct
+	public void init(){
+	  exampleBS = new ExampleBS(); 
 	}
 	
 	@PreDestroy

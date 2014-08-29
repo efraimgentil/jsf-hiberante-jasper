@@ -2,8 +2,10 @@ package br.com.efraimgentil.exemple.domain;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +42,7 @@ public class Example {
 	@Column(name = "date" , nullable = false )
 	private Date date;
 	
-	@ManyToOne
+	@ManyToOne( fetch = FetchType.LAZY )
 	@JoinColumn(name = "complex_example_id")
 	private ComplexExample complexExample;
 	
@@ -93,6 +95,7 @@ public class Example {
 		this.date = date;
 	}
 
+	@Basic(fetch = FetchType.LAZY)
   public ComplexExample getComplexExample() {
     return complexExample;
   }

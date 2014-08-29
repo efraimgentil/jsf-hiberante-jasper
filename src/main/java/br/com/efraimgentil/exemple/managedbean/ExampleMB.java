@@ -1,5 +1,7 @@
 package br.com.efraimgentil.exemple.managedbean;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,6 +16,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -74,6 +79,7 @@ public class ExampleMB implements Serializable{
 			JRDataSource beanDataSource = new JRBeanCollectionDataSource( listExamples );
 			JasperPrint jasperPrint = JasperFillManager.fillReport( getReportInputStream() , getParameters() , beanDataSource );
 			FacesContext facesContext = FacesContext.getCurrentInstance();
+			HttpServletResponse httpServletResponse =  (HttpServletResponse) facesContext.getExternalContext().getResponse();  
 			OutputStream outputStream = facesContext.getExternalContext().getResponseOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
 			facesContext.responseComplete();
@@ -82,6 +88,16 @@ public class ExampleMB implements Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public StreamedContent openPdfWithPrimefaces() throws JRException{
+	  
+	  ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+	  JRDataSource beanDataSource = new JRBeanCollectionDataSource( listExamples );
+      JasperPrint jasperPrint = JasperFillManager.fillReport( getReportInputStream() , getParameters() , beanDataSource );
+      JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+      InputStream relatorio = new ByteArrayInputStream(outStream.toByteArray());
+	  return new DefaultStreamedContent(relatorio , "application/pdf", "reportfile.pdf" );
 	}
 	
 	protected Map<String, Object> getParameters(){

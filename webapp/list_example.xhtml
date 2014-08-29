@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
 		<p>List of Examples</p>
@@ -11,7 +11,7 @@
 		</p>
 		<h:form id="form-exemple" prependId="false">
 
-			<h:dataTable value="#{exampleMB.listExemple}" var="exemple">
+			<h:dataTable value="#{exampleMB.listExamples}" var="exemple">
 				<h:column>
 					<h:outputText value="#{exemple.name}" />
 				</h:column>
@@ -24,17 +24,35 @@
 			</h:dataTable>
 		</h:form>
 
-
-		<h:panelGroup rendered="#{not empty exampleMB.listExemple }">
+        
+        <script type="text/javascript">
+			function showStatus() {
+				carregando.show();
+			}
+			
+			function hideStatus() {
+				carregando.hide();
+			}
+			</script>
+        
+		<h:panelGroup rendered="#{not empty exampleMB.listExamples }">
 			<h:form prependId="false" style="display:inline-block">
 				<h:commandButton value="Download PDF" action="#{exampleMB.downloadPdf}" />
 				<h:commandButton value="Open PDF" action="#{exampleMB.openPdf}"  />
+				<p:commandButton value="Open PDF" widgetVar="btn" onclick="PrimeFaces.monitorDownload( showStatus , hideStatus )"
+				         ajax="false"  >
+				    <p:fileDownload value="#{exampleMB.openPdfWithPrimefaces()}"/>        
+				 </p:commandButton>
 			</h:form>
 			<h:form prependId="false" style="display:inline-block" target="_blank">
 				<h:commandButton value="Open PDF in new Window" action="#{exampleMB.openPdf}" />
 			</h:form>
 		</h:panelGroup>
-
+        
+        
+        <p:dialog widgetVar="carregando" header="Carregando">
+            <h:outputText value="Carregando aguarde..." />
+        </p:dialog>
 
 	</ui:define>
 </ui:composition>

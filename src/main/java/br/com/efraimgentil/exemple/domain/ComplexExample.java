@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -21,7 +22,7 @@ public class ComplexExample implements Serializable {
   
   private String name;
   
-  @OneToMany(mappedBy = "complexExample" , cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "complexExample" , cascade = CascadeType.ALL )
   private List<Example> examples = new ArrayList<>();
 
   public Integer getId() {

@@ -6,7 +6,6 @@
 	<display-name>JsfHibernateJasper</display-name>
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
-		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 	<!-- Activate the JSF 2.0 servlet -->

@@ -32,14 +32,20 @@ public class ComplexExampleMain {
   private static final boolean OPEN_FILE_AT_THE_END = true;
 
   public static void main(String[] args) {
-
+    
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("example-pu");
+    EntityManager entityManager =  factory.createEntityManager();
+    
     ComplexExample ce = new ComplexExample();
     ce.setName("My example");
     int quantity = 10;
     for (int i = 0; i < quantity; i++) {
-      ce.getExamples().add(
-          new Example(String.format("Example %d", i), "  No Description    ", new Date()));
+      Example example = new Example(String.format("Example %d", i), "  No Description    ", new Date());
+      example.setComplexExample(ce);
+      ce.getExamples().add(example);
     }
+    
+    entityManager.persist(ce);;
 
     InputStream inputStream =
         ExampleUsingMain.class.getResourceAsStream("/reports/complexExample.jasper");
