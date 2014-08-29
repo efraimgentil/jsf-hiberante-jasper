@@ -15,6 +15,7 @@ import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -80,6 +81,7 @@ public class ExampleMB implements Serializable{
 			JasperPrint jasperPrint = JasperFillManager.fillReport( getReportInputStream() , getParameters() , beanDataSource );
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			HttpServletResponse httpServletResponse =  (HttpServletResponse) facesContext.getExternalContext().getResponse();  
+			httpServletResponse.addCookie( new Cookie("downloadComplete", "true") );
 			OutputStream outputStream = facesContext.getExternalContext().getResponseOutputStream();
 			JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
 			facesContext.responseComplete();

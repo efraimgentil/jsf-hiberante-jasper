@@ -38,7 +38,7 @@
 		<h:panelGroup rendered="#{not empty exampleMB.listExamples }">
 			<h:form prependId="false" style="display:inline-block">
 				<h:commandButton value="Download PDF" action="#{exampleMB.downloadPdf}" />
-				<h:commandButton value="Open PDF" action="#{exampleMB.openPdf}"  />
+				<h:commandButton value="Open PDF" action="#{exampleMB.openPdf}" onclick="monitorDownload(showStatus , hideStatus)" />
 				<p:commandButton value="Open PDF" widgetVar="btn" onclick="PrimeFaces.monitorDownload( showStatus , hideStatus )"
 				         ajax="false"  >
 				    <p:fileDownload value="#{exampleMB.openPdfWithPrimefaces()}"/>        
@@ -49,6 +49,30 @@
 			</h:form>
 		</h:panelGroup>
         
+        <script>
+           // <![CDATA[
+           function monitorDownload( onStartCallback , onCompleteCallback ){
+               document.cookie = "downloadComplete=false";
+               function checkDownloadComplete( ){
+            	   var cookies = document.cookie;
+                   var cookieVals = cookies.split(";");
+                   for(i = 0; i < cookieVals.length ; i++){
+                      var arrCookie = cookieVals[i].split("=");
+                      if(arrCookie[0].trim() == "downloadComplete"){
+                          if(arrCookie[1] == "true"){
+                              clearInterval(s);
+                              s = null;
+                        	  onCompleteCallback();
+                          }
+                      }
+                   }
+               }
+        	   var s = setInterval( checkDownloadComplete  , 100);
+        	   onStartCallback();
+        	   return true;
+           }
+           // ]]>
+        </script>
         
         <p:dialog widgetVar="carregando" header="Carregando">
             <h:outputText value="Carregando aguarde..." />
