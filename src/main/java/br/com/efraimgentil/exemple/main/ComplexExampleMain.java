@@ -8,12 +8,10 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.swing.filechooser.FileSystemView;
 
@@ -23,7 +21,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import br.com.efraimgentil.exemple.dao.ExampleDAO;
 import br.com.efraimgentil.exemple.domain.ComplexExample;
 import br.com.efraimgentil.exemple.domain.Example;
 

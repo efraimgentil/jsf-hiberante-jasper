@@ -13,6 +13,7 @@ import br.com.efraimgentil.exemple.domain.Example;
 
 public class AppMain {
 
+  @SuppressWarnings("unchecked")
   public static void main(String[] args) {
 
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("example-pu");

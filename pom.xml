@@ -26,18 +26,6 @@
 
     <!-- JSF -->
     <dependency>
-      <groupId>com.sun.faces</groupId>
-      <artifactId>jsf-api</artifactId>
-      <version>2.1.6</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.sun.faces</groupId>
-      <artifactId>jsf-impl</artifactId>
-      <version>2.1.6</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>4.0</version>
@@ -97,10 +85,34 @@
   <profiles>
     <profile>
       <id>tomcat</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.sun.faces</groupId>
+          <artifactId>jsf-api</artifactId>
+          <version>2.1.6</version>
+        </dependency>
+    
+        <dependency>
+          <groupId>com.sun.faces</groupId>
+          <artifactId>jsf-impl</artifactId>
+          <version>2.1.6</version>
+        </dependency>
+      </dependencies>
     </profile>
 
     <profile>
       <id>jboss</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 
